@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02if.html</title>
+    <style>
+        table {
+            border: 3px solid red;
+            border-collapse: collapse;
+            text-align: center;
+            color: blue;
+
+        }
+
+        td {
+            border-left: 2px solid orange;
+            border-right: 2px solid orange;
+            border-collapse: collapse;
+            text-align: center;
+            width: 6em;
+            line-height: 1.5em;
+        }
+
+        .Y {
+            background-color: aqua;
+            border: 3px solid red;
+        }
+    </style>
+    <script>
+        function padLeft(str, len) {
+            str = '' + str;
+            if (str.length >= len) {
+                return str;
+            } else {
+                return padLeft("0" + str, len);
+            }
+        }
+        function getData() {
+            var row1 = document.getElementById("row").value;
+            var col1 = document.getElementById("col").value;
+            alert(document.getElementById("test").rows[row1].cells[col].firstChild.data);
+        }
+        //使用window.prompt()方法，取得變數値
+        var X = parseInt(window.prompt("請輸入X值:"));
+        var Y = parseInt(window.prompt("請輸入Y值:"));
+        if (X > Y) {
+            max = X;
+            min = Y;
+        }
+        else {
+            max = Y;
+            min = X;
+        }
+
+        document.write( "<table ><tr><td class=\"Y\">X*Y</td>");
+        for (i = 1; i <= min; i++) {
+            document.write( "<td class=\"Y\">" + padLeft(i, 2) + "</td>");
+        }
+        document.write( "</tr>")
+        for (i = 1; i <= max; i++) {
+            document.write( "<tr><td class=\"Y\">" + padLeft(i, 2) + "</td>");
+            for (j = 1; j <= min; j++) {
+                document.write( "<td>" + (padLeft(i, 2) + "*" + padLeft(j, 2) + "=" + padLeft((i * j), 2)) + "</td>");
+            }
+            document.write( "</tr>");
+        }
+        document.write( "</table><br>");
+
+        document.write( "<table ID=\"test\"><tr><td class=\"Y\">X*Y</td>");
+        for (i = 1; i <= min; i++) {
+            document.write( "<td class=\"Y\">" + padLeft(i, 2) + "</td>");
+        }
+        document.write( "</tr>")
+        for (i = 1; i <= max; i++) {
+            document.write( "<tr><td class=\"Y\">" + padLeft(i, 2) + "</td>");
+            for (j = 1; j <= min; j++) {
+                document.write( "<td>" + (i * j) + "</td>");
+            }
+            document.write( "</tr>");
+        }
+        document.write( "</table><br>");
+    </script>
+</head>
+
+<body>
+    Row
+    <input type="text" name="row" id="row" placeholder="1"> Col
+    <input type="text" name="col" id="col" placeholder="1">
+    <input type="button" value="search" onclick="getData();">
+</body>
+
+</html>

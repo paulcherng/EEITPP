@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>HomwWork003</title>
+    <script>
+
+        var index;
+        var imgs = document.getElementsByTagName("img");
+
+        document.addEventListener("DOMContentLoaded", add)
+
+        function add() {
+            for (var i = 1; i <= imgs.length; i++) {
+                document.getElementById("pic" + i).addEventListener("mouseover", mouseover);
+                document.getElementById("pic" + i).addEventListener("click", submit);
+                document.getElementById("pic" + i).addEventListener("mouseout", mouseout);
+            }
+        }
+        function mouseover() {
+            var imgs = document.getElementsByTagName("img");
+            //  alert(event.target.id)
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].src = "https://i.imgur.com/WCKAyrg.png";
+                if (event.target.id == imgs[i].id) {
+                    index = i;
+                    document.getElementById("result").innerHTML = "打分中...<em>" + (index + 1) + "</em>";
+                    document.getElementById("result").className = "ori"
+                    break;
+                }
+            }
+        }
+        function mouseout() {
+            var imgs = document.getElementsByTagName("img");
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].src = "https://i.imgur.com/SI2sy5t.png";
+            }
+        }
+        function submit() {
+            document.getElementById("result").className = "res";
+            document.getElementById("result").innerHTML = "<em>你給" + (index + 1) + "顆星!!</em>";
+        }
+
+    </script>
+    <style>
+        img {
+            width: 100px;
+        }
+
+        p {
+            font-size: 25px;
+        }
+
+        em {
+            color: red
+        }
+
+        .ori {
+            font-size: 25px;
+        }
+
+        .res {
+            font-size: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <div>
+
+            <img src="https://i.imgur.com/SI2sy5t.png" id="pic1">
+            <img src="https://i.imgur.com/SI2sy5t.png" id="pic2">
+            <img src="https://i.imgur.com/SI2sy5t.png" id="pic3">
+            <img src="https://i.imgur.com/SI2sy5t.png" id="pic4">
+            <img src="https://i.imgur.com/SI2sy5t.png" id="pic5">
+
+        </div>
+        <p id="result">打分中...
+            <em id="rate"></em>
+        </p>
+    </table>
+
+</body>
+
+</html>

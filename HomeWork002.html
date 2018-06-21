@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        form {
+            width: 500px;
+            margin: auto;
+        }
+
+        fieldset {
+            border-radius: 15px;
+            border-color: rgb(33, 241, 33)
+        }
+
+        div {
+            border-bottom: 1px solid grey;
+            margin: 1em;
+        }
+
+        input {
+            line-height: 1em;
+            width: 13em;
+
+        }
+
+        p {
+            font-size: 12px;
+            margin-top: 5px;
+            color: rgb(158, 156, 156);
+            padding-bottom: 8px;
+        }
+
+        .check {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            visibility: hidden;
+        }
+
+        .button {
+            width: auto;
+            text-align: center;
+            margin: auto;
+            border: none;
+        }
+
+        span {
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function Namecheck() {
+            var name = document.getElementById("nameval").value;
+            var namelength = name.length;
+            var pattern = new RegExp("[\u4E00-\u9FA5]+");/*====> var pattern=/^[\u4e00-\u9fff]{2,}$/;*/
+            if (pattern.test(name) && namelength > 1) {
+                document.getElementById("namecheck").src = "https://i.imgur.com/JsDgJvv.png"
+                document.getElementById("namecheck").style.visibility = "visible"
+                document.getElementById("Nmessage").innerHTML = "輸入正確"
+            } else if (name == "") {
+                document.getElementById("namecheck").src = "https://i.imgur.com/ElcCNpM.png"
+                document.getElementById("namecheck").style.visibility = "visible"
+                document.getElementById("Nmessage").innerHTML = "姓名不可為空白"
+            } else {
+                document.getElementById("namecheck").src = "https://i.imgur.com/ElcCNpM.png"
+                document.getElementById("namecheck").style.visibility = "visible"
+                document.getElementById("Nmessage").innerHTML = "輸入格式錯誤"
+            }
+        }
+        function PwdCheck() {
+            var Pwd = document.getElementById("pwdval").value;
+            re = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[\-\_\=+*!@#$%^&*(){}/>.,;:'"|[\]~]).{6,}$/;
+            if (re.test(Pwd)) {
+                document.getElementById("pwdcheck").src = "https://i.imgur.com/JsDgJvv.png";
+                document.getElementById("pwdcheck").style.visibility = "visible"
+                document.getElementById("Pmessage").innerHTML = "輸入正確"
+            } else if (Pwd == "") {
+                document.getElementById("pwdcheck").src = "https://i.imgur.com/ElcCNpM.png"
+                document.getElementById("pwdcheck").style.visibility = "visible"
+                document.getElementById("Pmessage").innerHTML = "密碼不可為空白"
+            } else {
+                document.getElementById("pwdcheck").src = "https://i.imgur.com/ElcCNpM.png"
+                document.getElementById("pwdcheck").style.visibility = "visible"
+                document.getElementById("Pmessage").innerHTML = "輸入格式錯誤"
+            }
+        }
+        function DateCheck() {
+            var year = false, month = false, day = false;
+            var datevalue = document.getElementById("dateval").value;
+            var date = datevalue.split("/")
+            var theYear = date[0];
+            var theMonth = date[1];
+            var theDate = date[2];
+            var comdate = new Date(datevalue);
+            if (date[0] == comdate.getFullYear() && date[1] == (comdate.getMonth() + 1) && date[2] == comdate.getDate()) {
+                document.getElementById("datecheck").src = "https://i.imgur.com/JsDgJvv.png"
+                document.getElementById("datecheck").style.visibility = "visible"
+                document.getElementById("Dmessage").innerHTML = "輸入正確"
+            }
+            else {
+                document.getElementById("datecheck").src = "https://i.imgur.com/ElcCNpM.png"
+                document.getElementById("datecheck").style.visibility = "visible"
+                document.getElementById("Dmessage").innerHTML = "輸入格式錯誤"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form action="">
+        <fieldset>
+            <legend>form Check</legend>
+            <div>
+                <label for="nameval">姓名:</label>
+                <input type="text" name="nameinput" id="nameval" size="10" placeholder="王建民" onblur="Namecheck()">
+                <img class="check" src="" id="namecheck">
+                <span id="Nmessage"></span>
+
+
+                <p>(1.不可空白，2.至少兩個字以上，3.必須全部為中文字)</p>
+            </div>
+            <div>
+                <label for="pwdval">密碼:</label>
+                <input type="password" name="pwdinput" id="pwdval" size="12" placeholder="請輸入密碼" onblur="PwdCheck()">
+                <img class="check" src="" id="pwdcheck">
+                <span id="Pmessage"></span>
+
+
+                <p>(1.不可空白，2.至少6個字且必須包含英文字母、數字、特殊字元[!@#$%^&*])</p>
+            </div>
+            <div>
+                <label for="dateval">日期:</label>
+                <input type="text" name="dateinput" id="dateval" size="3" placeholder="ex:2000/2/29" onblur="DateCheck()">
+                <img class="check" src="" id="datecheck">
+                <span id="Dmessage"></span>
+                <p>格式:西元年/月/日 yyyy/mm/dd</p>
+            </div>
+            <div class="button">
+                <input class="button" type="submit" value="送出">
+                <input class="button" type="reset" value="清除">
+            </div>
+
+
+        </fieldset>
+    </form>
+</body>
+
+</html>

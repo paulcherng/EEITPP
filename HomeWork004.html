@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    var clicked = false
+    var speed = 1500;
+    var k = 0;
+    var inter = setInterval(imgsplay, speed)
+    img1 = "https://i.imgur.com/wX5z0Xp.jpg"
+    img2 = "https://i.imgur.com/MkPkiZP.png"
+    img3 = "https://i.imgur.com/hObURU8.jpg"
+    img4 = "https://i.imgur.com/fFQfwJ9.jpg"
+    img5 = "https://i.imgur.com/fDoJN1e.jpg"
+    img6 = "https://i.imgur.com/Uzab9n5.png"
+    img7 = "https://i.imgur.com/2f66cAa.jpg"
+    img8 = "https://i.imgur.com/f5epmxz.jpg"
+    img9 = "https://i.imgur.com/ooxmKPL.jpg"
+    img10 = "https://i.imgur.com/7I5OQHv.jpg"
+    var imgs = new Array(img1, img2, img3, img4, img5, img6, img7, img8, img9, img10)
+    function begin() {
+        document.getElementById("spvalue").innerHtml = speed + "ms"
+        for (var i = 0; i < imgs.length; i++) {
+            document.getElementById("num").innerHTML =
+                document.getElementById("num").innerHTML +
+                "<input type='button' class='origin' id='" + (i + 1) + "' value='" + (i + 1) + "'>";
+        }
+        for (var i = 0; i < imgs.length; i++) {
+            document.getElementById((i + 1)).addEventListener("click", select)
+        }
+        document.getElementById("img").addEventListener("click", test)
+
+    }
+    function test() {
+        if (k < 0) {
+            k = 4;
+        }
+        var count = k % imgs.length;
+        window.open(imgs[count - 1], 'test', config = 'height=500,width=500')
+    }
+    function imgsplay() {
+        if (k < 0) {
+            k = imgs.length - 1;
+        } else if (k > imgs.length) {
+            k = 1
+        }
+        var count = k % imgs.length;
+        document.getElementById("img").src = imgs[count];
+        for (var i = 0; i < imgs.length; i++) {
+            if ((i + 1) == (count + 1))
+                document.getElementById((i + 1)).className = "highlight";
+            else
+                document.getElementById((i + 1)).className = "origin"
+        }
+        if (!clicked) {
+            document.getElementById("play").value = "STOP"
+        } else {
+            document.getElementById("play").value = "PLAY"
+        }
+        k++;
+    }
+    function select() {
+        a = event.target.id - 1
+        document.getElementById("img").src = imgs[a];
+        for (var i = 0; i < imgs.length; i++) {
+            if ((i + 1) == event.target.id)
+                document.getElementById((i + 1)).className = "highlight";
+            else
+                document.getElementById((i + 1)).className = "origin"
+        }
+        k = event.target.id;
+        clicked = false;
+        control1();
+
+    }
+    function forward1() {
+        clicked = false
+        k = k - 2;
+        imgsplay();
+        control1();
+    }
+    function next1() {
+        clicked = false
+        imgsplay();
+        control1();
+    }
+    function control1() {
+        clicked = !(clicked)
+        if (clicked) {
+            clearInterval(inter);
+            document.getElementById("play").value = "PLAY"
+        } else if (!clicked) {
+            clearInterval(inter);
+            inter = setInterval(imgsplay, speed)
+            document.getElementById("play").value = "STOP"
+        }
+
+    }
+    function getspeed() {
+        speed = document.getElementById("speed").value;
+        document.getElementById("spvalue").innerHTML = speed + "ms";
+        clearInterval(inter);
+        inter = setInterval(imgsplay, speed)
+    }
+
+</script>
+<style>
+    legend {
+        text-align: center;
+        text-shadow: green 6px 6px 5px;
+        text-decoration-style: blur;
+        font-size: 30px;
+    }
+
+    fieldset {
+        background-color: rgba(175, 252, 255, 0.5);
+        width: 650px;
+        margin: auto;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 10px 10px 4px;
+        height: 700px;
+    }
+
+    img {
+        height: 416px;
+        width: 315px;
+        vertical-align: middle;
+        align-self: center;
+        border-radius: 3px;
+        /* box-shadow: 5px 5px 2px; */
+        margin-top: 16px;
+    }
+
+    div {
+        margin: auto;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    input {
+        margin: 10px;
+        box-shadow: 3px 3px 1px;
+        width: auto;
+        height: auto;
+        border-radius: 7px;
+        font-family: monospace;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .button {
+        font-size: 150%;
+    }
+
+    .highlight {
+        font-size: 150%;
+        background-color: rgba(255, 255, 0, 0.589);
+        color: rgb(138, 57, 2);
+        width: 2.5em;
+
+    }
+
+    .origin {
+        font-size: 100%;
+        background-color: azure;
+        color: black;
+        width: 2em;
+    }
+
+    input:hover {
+        background-color: rgb(32, 206, 218);
+        color: rgb(58, 54, 54);
+        font-size: 150%;
+    }
+
+    .button:hover {
+        font-size: 170%
+    }
+
+    input[type="range"] {
+        box-shadow: none;
+        color: black
+    }
+
+    .tv {
+        margin-top: 15px;
+        padding-top: 20px;
+        height: 530px;
+        background-image: url("https://i.imgur.com/9QaNUlt.png");
+        background-repeat: no-repeat;
+        background-position: top center;
+        background-size: 53% 117%;
+        border-radius: 50px;
+    }
+</style>
+
+<body onload="begin()">
+    <form>
+        <fieldset>
+            <legend>Ads Carousel</legend>
+            <div id="tv" class="tv">
+                <img src="https://media1.giphy.com/media/3og0ICq6RIHdzjyDAI/giphy.gif" id="img" onclick="">
+            </div>
+            <div id="num">
+            </div>
+            <div id="controller" )>
+                <input type="button" class="button" value="FORWARD" id="forward" onclick="forward1()">
+                <input type="button" class="button" value="STOP" id="play" onclick="control1()">
+                <input type="button" class="button" value="NEXT" id="next" onclick="next1()">
+                <input type="range" name="speed" id="speed" oninput="getspeed()" value="1500" min="0" max="3000" step="10">
+                <span id="spvalue">1500ms</span>
+            </div>
+
+        </fieldset>
+    </form>
+
+</body>
+
+</html>

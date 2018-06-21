@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    var selYear = document.getElementById("year").value;
+    var selMonth = document.getElementById("month").value;
+    var selDay = document.getElementById("day").value;
+    var oriMonth, oriYear, oriDay, oriDate;
+    function optionMaker() {
+        var year = 2010;
+        var month = 1;
+        for (var i = year; i <= 2020; i++) {
+            document.getElementById("year").innerHTML = document.getElementById("year").innerHTML + "<option value='" + i + "'>" + i + "</option>"
+        }
+        for (var j = month; j <= 12; j++) {
+            document.getElementById("month").innerHTML = document.getElementById("month").innerHTML + "<option value='" + j + "'>" + j + "</option>"
+        }
+        selYear = document.getElementById("year").value;
+        selMonth = document.getElementById("month").value;
+        days = new Date(selYear, selMonth, 0).getDate();
+        document.getElementById("day").innerHTML = "";
+        for (var i = 1; i <= days; i++) {
+            document.getElementById("day").innerHTML = document.getElementById("day").innerHTML + "<option value='" + i + "'>" + i + "</option>"
+        }
+    }
+    function dayMaker() {
+        selYear = document.getElementById("year").value;
+        selMonth = document.getElementById("month").value;
+        selDay = document.getElementById("day").value;
+        days1 = new Date(selYear, selMonth, 0).getDate();
+        document.getElementById("day").innerHTML = "";
+        for (var i = 1; i <= days1; i++) {
+            document.getElementById("day").innerHTML = document.getElementById("day").innerHTML + "<option value='" + i + "'>" + i + "</option>"
+        }
+        dayChecker();
+        oriDay = document.getElementById("day").value;
+    }
+    function selector() {
+        selYear = document.getElementById("year").value;
+        selMonth = document.getElementById("month").value;
+        selDay = document.getElementById("day").value;
+        oriDay = document.getElementById("day").value;
+        document.getElementById("lowerright").innerHTML = "您選擇的日期是" + selYear + "年" + selMonth + "月" + selDay + "日"
+    }
+    function dayChecker() {
+        if (oriDay != null) {
+            if (days1 < oriDay) {
+                document.getElementById("lowerright").innerHTML = "您選擇的日期是" + selYear + "年" + selMonth + "月" + days1 + "日"
+                document.getElementById("day").value=days1;
+            } else {
+                document.getElementById("lowerright").innerHTML = "您選擇的日期是" + selYear + "年" + selMonth + "月" + oriDay + "日"
+                document.getElementById("day").value=oriDay;
+            }
+        }
+        else {
+            document.getElementById("lowerright").innerHTML = "您選擇的日期是" + selYear + "年" + selMonth + "月" + selDay + "日"
+        }
+    }
+</script>
+<style>
+    .left {
+        float: left;
+        width: 370px;
+        text-align: left;
+        padding-left: 10px;
+        height: 300px;
+    }
+
+    .right {
+        background: -webkit-linear-gradient(rgb(21, 87, 67) rgb(255, 0, 0));
+        float: right;
+        width: 370px;
+        border: 2px solid green;
+    }
+
+    .outer {
+        width: 800px;
+        height: auto;
+        margin: auto;
+    }
+
+    .lower {
+        background: -webkit-linear-gradient(top, rgb(91, 147, 127), rgb(31, 77, 87));
+        color: white;
+        height: 50px;
+        text-align: center;
+        vertical-align: top;
+        padding-top: 3px;
+        margin-top: 1px;
+    }
+
+    .upperright {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        background: -webkit-linear-gradient(top, rgb(91, 147, 127), rgb(31, 77, 87));
+        color: white;
+        padding-left: 10px;
+        line-height: 24px;
+        font-size: 24px;
+        margin: 0px 0px;
+        height: 1.5em;
+        padding-top: 4px;
+        vertical-align: center;
+        ;
+    }
+
+    .selection {
+        width: 5em;
+        font-size: 16px;
+        padding-left: 5px;
+        margin: 5px;
+    }
+
+    .lowerright {
+        height: 265px;
+        padding: 5px;
+    }
+
+    .upperleft {
+        font-size: 28px;
+        font-weight: bold;
+        padding-left: 5px;
+        margin: 5px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    fieldset {
+        border-collapse: collapse;
+        margin: 0px;
+    }
+
+    .lowervalue {
+        text-align: center;
+        vertical-align: top;
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+</style>
+
+<body onload="optionMaker()">
+    <form class="outer">
+        <fieldset class="upper">
+            <div class="left">
+                <p class="upperleft">Welcome</p>
+                <select name="year" id="year" class="selection" oninput="dayMaker()">
+                </select>
+                <span>年</span>
+                <select name="month" id="month" class="selection" oninput="dayMaker()">
+                </select>
+                <span>月</span>
+                <select name="day" id="day" class="selection" oninput="selector()">
+                </select>
+                <span>日</span>
+            </div>
+            <div class="right">
+                <div class="upperright">
+                    Information
+                </div>
+                <div class="lowerright" id="lowerright">您尚未選擇日期</div>
+            </div>
+        </fieldset>
+        <fieldset class="lower">
+            <p class="lowervalue">Copyright®2015サイト名を入れてください.All Rights Reserved.</p>
+        </fieldset>
+    </form>
+</body>
+
+</html>
